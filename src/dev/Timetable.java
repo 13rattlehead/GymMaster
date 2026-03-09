@@ -1,11 +1,8 @@
 package dev;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.TreeMap;
-
+import java.util.*;
 import dev.TrainingSession.DayOfWeek;
+
 
 public class Timetable {
 
@@ -34,11 +31,9 @@ public class Timetable {
         sessionsAtTime.add(trainingSession);
     }
 
-
     public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         return timetable.get(dayOfWeek);
     }
-
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(
             DayOfWeek dayOfWeek,
@@ -58,4 +53,38 @@ public class Timetable {
 
         return sessions;
     }
+
+    public List<CounterOfTrainings> getCountByCoaches() {
+
+        Map<Coach, Integer> counters = new HashMap<>();
+        for (DayOfWeek day : DayOfWeek.values()) {
+            TreeMap<TimeOfDay, List<TrainingSession>> dayTable = timetable.get(day);
+            if (dayTable == null) {
+                continue;
+            }
+            for (TimeOfDay time : dayTable.keySet()) {
+                List<TrainingSession> sessions = dayTable.get(time);
+                for (TrainingSession session : sessions) {
+                    Coach coach = session.getCoach();
+                    counters.put(coach, counters.getOrDefault(coach, 0) + 1);
+                }
+            }
+        }
+        List<CounterOfTrainings> countersList = new ArrayList<>();
+
+        for (Map.Entry<Coach, Integer> entry: counters.entrySet()) {
+            countersList.add(new CounterOfTrainings(entry.getKey(), entry.getValue()));
+        }
+        countersList.sort((c1, c2) -> {
+            int compareCount = Integer.compare(c2.getCountTraining(), c1.getCountTraining());
+
+            if (compareCount != 0) {
+                return compareCount;
+            }
+
+            return c1.getCoach().getSurname().compareTo(c2.getCoach().getSurname());
+        });
+        return countersList;
+    }
+
 }
