@@ -1,5 +1,7 @@
 package dev;
 
+import java.util.Objects;
+
 public class TimeOfDay implements Comparable<TimeOfDay> {
 
     @Override
@@ -26,5 +28,17 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
 
     public int getMinutes() {
         return minutes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TimeOfDay timeOfDay = (TimeOfDay) o;
+        return hours == timeOfDay.hours && minutes == timeOfDay.minutes;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hours, minutes);
     }
 }
