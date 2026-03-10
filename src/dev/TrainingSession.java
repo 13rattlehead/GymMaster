@@ -1,3 +1,5 @@
+package dev;
+
 public class TrainingSession {
 
     //группа
@@ -30,9 +32,5 @@ public class TrainingSession {
 
     public TimeOfDay getTimeOfDay() {
         return timeOfDay;
-    }
-
-    public enum DayOfWeek {
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     }
 }
