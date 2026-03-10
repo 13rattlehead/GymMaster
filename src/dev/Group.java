@@ -1,3 +1,5 @@
+package dev;
+
 public class Group {
     //название группы
     private String title;
