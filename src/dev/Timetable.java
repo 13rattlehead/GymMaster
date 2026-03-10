@@ -1,7 +1,7 @@
 package dev;
 
 import java.util.*;
-import dev.TrainingSession.DayOfWeek;
+import dev.DayOfWeek;
 
 
 public class Timetable {
