@@ -34,7 +34,4 @@ public class TrainingSession {
         return timeOfDay;
     }
 
-    public static enum DayOfWeek {
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
-    }
 }
